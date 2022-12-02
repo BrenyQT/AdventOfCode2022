@@ -1,6 +1,9 @@
 package DayOne;
 
 public class main {
-    FatElves elf = new FatElves();
+    public static void main(String[] args) {
+        FatElves elf = new FatElves();
+        elf.calorieCalculator();
+    }
 
 }
