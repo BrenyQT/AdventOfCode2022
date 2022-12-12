@@ -3,16 +3,21 @@ package Day3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class bagPackingElves {
 
     String str;
-
-    int total ;
+    ArrayList<String> storeRoom = new ArrayList<>();
+    String one;
+    String two;
+    String three;
+    int total;
 
     public void elfStacker() {
+
         try {
             //creates a file object
             File myObj = new File("Day3\\input.txt");
@@ -22,21 +27,27 @@ public class bagPackingElves {
             while (myReader.hasNextLine()) {
                 //creating a string with next line
                 str = myReader.nextLine();
-                String strSplit1 = str.substring(0, str.length() / 2);
-                String strSplit2 = str.substring(str.length() / 2);
-                total += gotchaBitch(Compare(strSplit1, strSplit2));
+                storeRoom.add(str);
             }
-            System.out.println(total);
+            for (int i = 0; i < storeRoom.size(); ) {
+                one = storeRoom.get(i);
+                two = storeRoom.get(i + 1);
+                three = storeRoom.get(i + 2);
+                i += 3;
+                total += gotchaBitch(Compare(one, two, three));
+            }
 
+
+            System.out.println(total);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public char Compare(String strSplit1, String strSplit2) {
+    public char Compare(String str1, String str2, String str3) {
         char correct = 'c';
-        for (char x : strSplit2.toCharArray()) {
-            if (strSplit1.indexOf(x) != -1) {
+        for (char x : str2.toCharArray()) {
+            if (str1.indexOf(x) != -1 && str3.indexOf(x) != -1) {
                 correct = x;
             }
         }
